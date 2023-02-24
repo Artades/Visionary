@@ -1,0 +1,14 @@
+.app {
+  background-color: #050710;
+  width: 100%;
+  min-height: 100vh;
+}
+.container{
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+hr{
+  width: 100%;
+  opacity: 60%;
+}
