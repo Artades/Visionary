@@ -3,10 +3,11 @@ import styles from '../styles/pages/Home.module.css'
 import {selectIsAuth} from "../redux/slices/auth";
 import Header from "../components/Header";
 import {TypingGreeting} from "../components/TypingGreeting";
-import Sidebar from "../components/Sidebar";
+
 import Images from "../components/Images";
 import {useSelector} from "react-redux";
 import Overlay from "../components/Overlay";
+import Preview from "../components/Preview";
 
 
 const Home = () => {
@@ -37,36 +38,45 @@ const Home = () => {
         }
     }, [isSunrise, isSunset]);
 
-//Toggling icon name
-    const [iconName, setIconName] = useState('book-outline');
-    let [isBookHovered, setIsBookHovered] = useState(false);
-//Checking if user's authenticated
+
+    //Checking if user's authenticated
     const isAuth = useSelector(selectIsAuth);
     //Burger menu open property toggling
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+    const[newAtFirst, setNewAtFirst] = useState(false)
     return (
         <>
             <div className="container">
-                <Header/>
                 <div className={styles.home}>
                     <div className={styles.body}>
                         {isAuth ? (
                             <>
+                                <Header/>
                                 <div className={styles.bar}>
                                     <h2 className={styles.title}>{greeting} <TypingGreeting fullName={data.fullName}/>
+
                                     </h2>
-                                    <ion-icon name="reorder-three-outline"
-                                    onClick={() => setIsMenuOpen(!isMenuOpen)}
-                                    />
+
+                                   <div>
+                                       <ion-icon name="swap-vertical-outline" onClick={() => {
+                                           setNewAtFirst(!newAtFirst)
+                                       }
+                                       }></ion-icon>
+                                       <ion-icon name="reorder-three-outline"
+                                                 onClick={() => setIsMenuOpen(!isMenuOpen)}
+                                       />
+                                   </div>
                                 </div>
+                                <br/>
+                                <h3 className={styles.heading}>Today's popular:</h3>
                                 <br/>
                                 <main className={styles.main}>
                                    <div className={styles.mainBody}>
                                        <Images
                                            arePostsLoading={arePostsLoading}
                                            posts={posts}
-                                       />
+                                           orderOfTheImages={newAtFirst}
+                                                                               />
                                    </div>
                                 </main>
                                 <Overlay isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen}/>
@@ -74,9 +84,7 @@ const Home = () => {
 
 
                         ) : (
-                            <h2 style={{color: '#c50808'}}>
-                                You are not authenticated
-                            </h2>
+                         <Preview/>
                         )}
                     </div>
                 </div>

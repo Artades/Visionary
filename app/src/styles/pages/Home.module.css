@@ -46,6 +46,14 @@
 .title span{
     color: #0f3f87;
 }
+.heading{
+    align-self: start;
+    font-size: 16px;
+    font-weight: 500;
+    margin: 10px 0;
+    color: rgba(222, 231, 241, 0.51);
+    text-align:  start;
+}
 .cursor {
     animation: blink 0.8s infinite;
 
@@ -125,5 +133,10 @@
     justify-content: center;
     align-items: center;
 
-
+}
+.imagesBody{
+    flex-direction: column;
+    width: 100%;
+    display: flex;
+    align-items: center;
 }

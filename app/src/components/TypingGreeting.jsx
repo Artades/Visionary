@@ -10,7 +10,7 @@ export const TypingGreeting = ({ fullName }) => {
         const intervalId = setInterval(() => {
             if (index < fullName.length) {
                 setDisplayedGreeting(fullName.slice(0, index + 1));
-                setIndex(index + 1);
+                setIndex(index + 1 );
             } else {
                 setDisplayedGreeting(fullName);
                 setIsTypingComplete(true);

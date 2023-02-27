@@ -15,7 +15,7 @@ const Overlay = ({isMenuOpen, setIsMenuOpen}) => {
                 <ul className={styles.list}>
                     <li><ion-icon name="home-outline"/>  <span>Home</span></li>
                     <Link to="/create-image"><li><ion-icon name="add-outline"/> <span>Create Image</span></li></Link>
-                    <li><ion-icon name="albums-outline"/> <span>My Pictures</span></li>
+                    <Link to="/my-images"><li><ion-icon name="albums-outline"/> <span>My Images</span></li></Link>
                 </ul>
             </div>
         </div>

@@ -12,3 +12,23 @@ hr{
   width: 100%;
   opacity: 60%;
 }
+/* Width */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #0f142c;;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #0f3f87;
+  border-radius: 6px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #0a244c;
+}

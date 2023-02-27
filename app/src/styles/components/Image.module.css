@@ -10,8 +10,28 @@
     box-shadow: 0 0 12px #546278;
     transition: 0.4s ease-in-out;
     cursor: pointer;
+    position: relative;
 }
+.action{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    opacity: 0;
+}
+.action ion-icon{
+    color: #dc2c2c;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+.action ion-icon:hover{
+   opacity: 0.6;
+    transition: 0.3s ease-in-out;
 
+}
 .body{
     border-radius: 12px;
     width: 100%;
@@ -20,13 +40,20 @@
     background: rgb(3,14,18);
     background: linear-gradient(0deg, rgba(3,14,18,0.90) 0%, rgba(3,14,18,0) 100%);
 }
+a{
+    text-decoration: none;
+}
 .image:hover{
     transform: scale(1.020);
 }
 .image:hover .body{
     background: rgb(3,14,18);
     background: linear-gradient(0deg, rgba(3,14,18,0.98) 0%, rgba(3,14,18,0) 100%);
-    transition: 1s ease-in-out;
+    transition: 0.3s ease-in-out;
+}
+.image:hover .action{
+    transition: 0.3s ease-in-out;
+    opacity: 1;
 }
 
 .footer{

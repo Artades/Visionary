@@ -1,24 +1,51 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import styles from '../styles/pages/CreateImage.module.css'
 import inputStyles from "../styles/components/Input.module.css";
 import axios from '../axios'
 import {useNavigate} from "react-router-dom";
 
-
 const CreateImage = () => {
-    const navigate= useNavigate();
     const[description, setDescription] = useState('');
     const inputFileRef = useRef(null);
     const [imageUrl, setImageUrl] = useState('');
     const[isLoading, setIsLoading] = useState(false);
-//Handle picking of files
+    //Go Back
+    const navigate = useNavigate()
+    const goBack = () => {
+        navigate('/home')
+    }
+    useEffect(() => {
+        const handleKeyDown = event => {
+            if (event.key === 'Escape') {
+                goBack();
+            }
+        };
+
+        document.addEventListener('keydown', handleKeyDown);
+
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown);
+        };
+    })
+    const handleKeyDown = event => {
+        if (event.key === 'Escape') {
+            goBack();
+        }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+
+        document.removeEventListener('keydown', handleKeyDown);
+
+    //Handle picking of files
     const handleChangeFile = async (event) => {
         try{
             const formData = new FormData();
             const file = event.target.files[0]
             formData.append('image', file)
             const {data} = await axios.post('/upload', formData);
-            setImageUrl(data.url)
+            setImageUrl(data.url);
+
         }
         catch (error) {
             console.log(error);
@@ -35,7 +62,7 @@ const CreateImage = () => {
             const {data} = await  axios.post('/posts', fields);
             const id = data._id;
 
-           navigate(`/home`)
+           navigate(`/home/${id}`)
         }
         catch(error){
             console.log(error);
@@ -49,7 +76,10 @@ const CreateImage = () => {
         <div className={styles.createImage}>
             <div className={styles.body}>
                 <div className={styles.bar}>
-                    <h1 className={styles.title}>Create Image</h1>
+                  <div className={styles.actions}>
+                      <ion-icon name="arrow-back-outline" onClick={goBack}/>
+                      <h1 className={styles.title}>Create Image</h1>
+                  </div>
                     <button className={`${styles.button} ${styles.publish}`} onClick={imageSubmit}>Publish</button>
                 </div>
                 <hr/>
@@ -68,9 +98,10 @@ const CreateImage = () => {
                     </div>
                     <div className={styles.image}>
                         {
-                            imageUrl && (
+                            imageUrl ? (
                                 <img  src={`http://localhost:8888${imageUrl}`} alt="Preview"/>
-                            )
+                            ) :
+                                <ion-icon name="document-attach-outline" />
                         }
                     </div>
                     <br/>
